@@ -1,0 +1,98 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.slick-dots li button:before {
+  font-size: 10px;  /* Adjust the size to your preference */
+  color: transparent;  /* Make the outer dots invisible */
+}
+
+.slick-dots li.slick-active button:before {
+  opacity: 1;
+  color: blue;  /* Change the color to your preference */
+}
+
+/* Optional: Customize the active dot appearance */
+.slick-dots li.slick-active button:before {
+  font-size: 10px;  /* Adjust the active dot size to your preference */
+  color: blue;  /* Active dot color */
+}
+
+.delete_profile-popup .modal-body {
+  padding: 22px 28px;
+}
+
+.delete_profile-popup .modal-content {
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  height: 300px;
+  border: 1px solid rgba(153, 168, 180, 1);
+  box-shadow: 0px -8px 0px 0px rgba(153, 168, 180, 1) inset;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 0 22px;
+}
+
+.delete_profile-popup .modal-dialog {
+  max-width: 358px;
+}
+
+.delet-popup-img {
+  width: 181px;
+  height: auto;
+  margin-top: 38px;
+}
+
+.modal-content h3 {
+  margin: 19px 0 10px 0;
+}
+
+.modal-content p.gray1 {
+  max-width: 258px;
+  margin: auto;
+  margin-bottom: 28px;
+}
+
+.yes-delete {
+  width: 100%;
+  height: 55px;
+  border: 1px solid rgba(168, 40, 16, 1);
+  background-color: rgba(224, 54, 22, 1);
+  box-shadow: 0px -5px 0px 0px rgba(0, 0, 0, 0.25) inset;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.delet-popup-content a:hover {
+  color: rgba(73, 101, 123, 0.8);
+}
+
+.btn-my-profile1 {
+  margin: 10px 0;
+  background-color: rgba(38, 173, 255, 1);
+  border: 0;
+  color: white;
+}
+
+.btn-my-profile1:hover,
+.btn-my-profile1:active {
+  color: white;
+  background-color: rgba(38, 173, 255, 0.8);
+}
+
+.cust_asidebar-profile-right-none {
+  display: none;
+}

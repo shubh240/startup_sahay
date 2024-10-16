@@ -1,0 +1,61 @@
+.spinnerDual {
+    width: 70px;
+    height: 70px;
+    border: 6px solid transparent;
+    border-top-color: #0255A3 ;
+    border-bottom-color :#0255A3;
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite;
+  }
+  
+  .spinnerDual > div {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    animation: spin 0.8s reverse linear infinite;
+  }
+  
+  .loader {
+    position: fixed;
+    z-index: 999;
+    overflow: visible;
+    margin: auto;
+    top: 45%;
+    left: 55%;
+    bottom: 0;
+    right: 0;
+  }
+  
+  .loader:before {
+    content: "";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  
+  .loader:not(:required) {
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+  }
+  
+  .loader:not(:required):after {
+    content: "";
+    display: block;
+    font-size: 10px;
+    width: 1em;
+    height: 1em;
+    margin-top: -0.5em;
+  }
+  
+  @keyframes spin {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
