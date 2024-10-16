@@ -1,0 +1,12 @@
+{
+    "signup": {
+        "username": "required",
+        "email": "required",
+        "mobile_number": "required",
+        "password": "required|min:6"
+    },
+    "signin": {
+        "password": "required|min:6"
+    }
+
+}

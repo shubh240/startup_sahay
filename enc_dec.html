@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CryptoJS Encryption & Decryption</title>
+  <style>
+    button {
+      background-color: #9c8cc3;
+      font-weight: 800;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .box {
+      border: black 1px solid;
+      padding: 5px;
+      margin-top: 25px;
+      overflow-wrap: break-word;
+    }
+    .json-success {
+      color: green;
+      font-weight: bold;
+    }
+    .json-failure {
+      color: red;
+      font-weight: bold;
+    }
+    .json-key {
+      color: blue;
+      font-weight: bold;
+    }
+    .json-value {
+      color: brown;
+    }
+  </style>
+</head>
+<body>
+  <h1>CryptoJS Encryption & Decryption HBL</h1>
+
+  <label for="plaintext">Plaintext:</label><br />
+  <textarea id="plaintext" rows="10" cols="100"></textarea><br />
+
+  <button onclick="encrypt()">Encrypt</button>
+  <button onclick="decrypt()">Decrypt</button>
+  <div class="box">
+    <h3>Encrypted Data:</h3>
+    <div id="encryptedData"></div>
+  </div>
+  <div class="box">
+    <h3>Decrypted Data:</h3>
+    <div id="decryptedData"></div>
+  </div>
+  <script src="crypto-js.js"></script>
+  <script>
+    // Convert a hex-encoded string to a WordArray object
+    function parseHexToWordArray(hexString) {
+      return CryptoJS.enc.Utf8.parse(hexString);
+    }
+
+    // Encrypt plaintext using AES with a given key and IV
+    function encryptWithAES(plaintext, key, iv) {
+      if (typeof plaintext === "object") {
+        plaintext = JSON.stringify(plaintext);
+      }
+      return CryptoJS.AES.encrypt(plaintext, key, { iv: iv }).toString();
+    }
+
+    // Decrypt ciphertext using AES with a given key and IV
+    function decryptWithAES(ciphertext, key, iv) {
+      ciphertext = ciphertext.replace(/"/g, "");
+
+      const decryptedBytes = CryptoJS.AES.decrypt(ciphertext, key, { iv: iv });
+      const decryptedData = decryptedBytes.toString(CryptoJS.enc.Utf8);
+      return decryptedData;
+    }
+
+    function encrypt() {
+      document.getElementById("decryptedData").innerText = "";
+      const plaintext = document.getElementById("plaintext").value;
+      const encryptionKey = CryptoJS.enc.Utf8.parse(
+        "VLaEQrkAjtcyayabGsadsAbFdBMiMZmV"
+      ); // 128-bit key in hex
+      const iv = CryptoJS.enc.Utf8.parse("VLaEQrkAjtcyayab"); // 128-bit IV in hex
+
+      const encryptedData = encryptWithAES(plaintext, encryptionKey, iv);
+      document.getElementById("encryptedData").innerText = encryptedData;
+    }
+
+    function decrypt() {
+      document.getElementById("encryptedData").innerText = "";
+      const encryptedData = document.getElementById("plaintext").value;
+      const encryptionKey = CryptoJS.enc.Utf8.parse(
+        "VLaEQrkAjtcyayabGsadsAbFdBMiMZmV"
+      ); // Same key as used for encryption
+      const iv = CryptoJS.enc.Utf8.parse("VLaEQrkAjtcyayab"); // Same IV as used for encryption
+
+      const decryptedData = decryptWithAES(encryptedData, encryptionKey, iv);
+
+      let decryptedJson;
+      let output = "";
+      try {
+        decryptedJson = JSON.parse(decryptedData);
+        output = syntaxHighlight(decryptedJson);
+        document.getElementById(
+          "decryptedData"
+        ).innerHTML = `<pre>${output}</pre>`;
+      } catch (error) {
+        document.getElementById(
+          "decryptedData"
+        ).innerHTML = `<pre>${decryptedData}</pre>`;
+      }
+    }
+
+    function syntaxHighlight(json) {
+      if (typeof json != 'string') {
+        json = JSON.stringify(json, undefined, 2);
+      }
+      json = json.replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>');
+      return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+        var cls = 'json-value';
+        if (/^"/.test(match)) {
+          if (/:$/.test(match)) {
+            cls = 'json-key';
+          } else {
+            cls = 'json-value';
+          }
+        } else if (/true|false/.test(match)) {
+          cls = 'json-boolean';
+        } else if (/null/.test(match)) {
+          cls = 'json-null';
+        }
+        return '<span class="' + cls + '">' + match + '</span>';
+      });
+    }
+  </script>
+</body>
+</html>
