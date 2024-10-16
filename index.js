@@ -16,7 +16,6 @@ app.use(
     parameterLimit: 50000,
   }),
 );
-git remote add origin https://github.com/shubh240/startup_sahay.git
 
 app.use(express.text());
 app.use(express.json());
